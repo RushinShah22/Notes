@@ -4,6 +4,7 @@ const dotenv = require("dotenv");
 const NoteRoute = require("./Routes/NoteRoute");
 const SignUpRoute = require("./Routes/SignUpRoute")
 const SignInRoute = require("./Routes/SignInRoute");
+const LogoutRoute = require("./Routes/LogoutRoute")
 
 
 dotenv.config({
@@ -18,6 +19,7 @@ app.use(cookieParser());
 app.use("/notes", NoteRoute);
 app.use("/signup", SignUpRoute);
 app.use("/signin", SignInRoute);
+app.use("/logout", LogoutRoute)
 
 
 
