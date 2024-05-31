@@ -1,28 +1,23 @@
 const express = require("express");
-const mongoose = require("mongoose");
+const cookieParser = require("cookie-parser");
+const dotenv = require("dotenv");
+const NoteRoute = require("./Routes/NoteRoute");
+const SignUpRoute = require("./Routes/SignUpRoute")
 
+
+dotenv.config({
+    path: "./config.env"
+});
 const app = express();
 
-const mongoURI = 'mongodb+srv://shahrushin32:P9Dl87vJsOjdcf7D@notes0.jbvpo29.mongodb.net/';
 
-(async () => {
-    try {
-        const conn = await mongoose.connect(mongoURI);
-
-        console.log(`MongoDB Connected`);
-
-        app.listen(4000, () => {
-            console.log("Listening on port 4000.");
-        })
-      
-    } catch (error) {
-      console.error(error.message);
-      process.exit(1);
-    }
-  })();
+app.use(express.json());
+app.use(cookieParser());
+// Defining different Routes
+app.use("/notes", NoteRoute);
+app.use("/signup", SignUpRoute);
 
 
 
 
-
-  
+module.exports = app;

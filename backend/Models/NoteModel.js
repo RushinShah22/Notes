@@ -18,9 +18,15 @@ const NoteSchema = new mongoose.Schema({
     },
     createdAt:{
         type: Date,
-        required: true
     }
 });
+
+
+
+NoteSchema.pre('save', function(next){
+    this.createdAt = new Date();
+    next();
+})
 
 const NoteModel = mongoose.model('note', NoteSchema);
 
