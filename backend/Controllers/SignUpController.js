@@ -1,12 +1,11 @@
 const mongoose = require("mongoose");
-const jwt = require("jsonwebtoken");
+const AuthController = require("./AuthController")
 const UserModel = require("./../Models/UserModel");
 
 module.exports.SignUpUser = async (req, res) => {
     try{
         const user = await UserModel.create(req.body);
-        const token = jwt.sign({id: user._id}, process.env.JWT_KEY, {expiresIn: 3 * 60 * 60 * 24});
-
+        const token = AuthController.createJwt(user._id);
         res.cookie("jwt", token,  {
             httpOnly: true,
             maxAge: 3 * 60 * 60 * 24 * 1000

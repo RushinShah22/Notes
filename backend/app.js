@@ -3,6 +3,7 @@ const cookieParser = require("cookie-parser");
 const dotenv = require("dotenv");
 const NoteRoute = require("./Routes/NoteRoute");
 const SignUpRoute = require("./Routes/SignUpRoute")
+const SignInRoute = require("./Routes/SignInRoute");
 
 
 dotenv.config({
@@ -16,6 +17,7 @@ app.use(cookieParser());
 // Defining different Routes
 app.use("/notes", NoteRoute);
 app.use("/signup", SignUpRoute);
+app.use("/signin", SignInRoute);
 
 
 

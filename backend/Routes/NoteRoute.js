@@ -4,29 +4,11 @@ const AuthController = require("./../Controllers/AuthController")
 
 const router = express.Router();
 
-router.all("*", AuthController.checkAuth);
-
-router.get("/", (req, res) => {
-    try{
-
-    }catch(err){
-
-    }
-})
-
-router.get("/:id", AuthController.checkAuth, NotesController.getANote);
-
-router.post("/", NotesController.addANote);
 
 
-router.patch("/:id", async(req, res) => {
+router.route("/").get(AuthController.checkAuth,NotesController.getAllNotes).post(AuthController.checkAuth,NotesController.addANote);
 
-})
-
-
-router.delete("/:id", async (req, res) => {
-
-})
+router.route("/:id").get(AuthController.checkAuth,NotesController.getANote);
 
 
 
