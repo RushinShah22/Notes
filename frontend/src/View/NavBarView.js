@@ -1,7 +1,13 @@
 import 'bulma/css/bulma.css'
+import SignUpView from './SignUpView'
+import LogInView from './LogInView';
 
+import { useState } from 'react';
 
 function NavBarView (){
+    const [signClicked, setSignClicked] = useState(false);
+    const [logClicked, setLogClicked] = useState(false);
+
     return (
         <div>
             <nav className="navbar is-success" role="navigation" aria-label="main navigation">
@@ -17,18 +23,19 @@ function NavBarView (){
                 <div className="navbar-end">
                     <div className="navbar-item">
                         <div className="buttons ">
-                            <a className="button" href="/signup">
+                            <button className="button" onClick={() => setSignClicked(true)} href="/signup" >
                                 <strong>Sign up</strong>
-                            </a>
-                            <a className="button" href="/login">
+                            </button>
+                            <button className="button" onClick={() => setLogClicked(true)} href="/login">
                                 Log in
-                            </a>
+                            </button>
                         </div>
                     </div>
                 </div>
             </nav>
 
-            
+            {signClicked && <SignUpView onSubmit={() => setSignClicked(false)}/>}
+            {logClicked && <LogInView onSubmit={() => setLogClicked(false)}/>}
 
         </div>
     )
