@@ -3,7 +3,7 @@ const app = require("./app.js");
 
 
 // connecting to mongoDB
-const mongoURI = 'mongodb+srv://shahrushin32:P9Dl87vJsOjdcf7D@notes0.jbvpo29.mongodb.net/';
+const mongoURI = process.env.MONGO_URL;
 
 (async () => {
     try {
@@ -12,7 +12,7 @@ const mongoURI = 'mongodb+srv://shahrushin32:P9Dl87vJsOjdcf7D@notes0.jbvpo29.mon
         console.log(`MongoDB Connected`);
 
         // Starting App
-        app.listen(4000, () => {
+        app.listen(process.env.PORT, () => {
             console.log("Listening on port 4000.");
         })
       
