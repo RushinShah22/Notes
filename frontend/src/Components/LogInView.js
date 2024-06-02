@@ -26,6 +26,8 @@ function LogInView({onSubmit, makeUserLoggedIn}){
             
         }catch(err){
             console.log(err);
+            setEmail(err.message);
+            setPassword(err.message);
         }
         
     }

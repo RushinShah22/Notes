@@ -33,7 +33,7 @@ const App = () => {
         withCredentials: true
       });
     
-      setNotes(notes.data.notes.map(note => <NoteCardView key={note._id} data={note}/>));
+      setNotes(notes.data.notes.map(note => <NoteCardView deleteNote={deleteNote} key={note._id} data={note}/>));
       if(!isLoggedIn){
         makeUserLoggedIn({firstName: cookies.firstName, lastName: cookies.lastName});
       }
@@ -47,7 +47,7 @@ const App = () => {
   }
   async function handleNewNote(data){
     try{
-      let note = {...data, createdAt: Date.now(), _id: setNotes.length + 1};
+      let note = {...data, createdAt: Date.now(), _id: notes.length + 1};
       if(isLoggedIn){
           const newNote = (await axios.post("http://localhost:4000/notes", data, {
           headers:{
@@ -58,7 +58,7 @@ const App = () => {
         note = newNote.data.note
         
       }
-      setNotes([<NoteCardView key={note._id} data={note}/>, ...notes]);
+      setNotes([<NoteCardView deleteNote={deleteNote} key={note._id} data={note}/>, ...notes]);
     }catch(err){
       console.log(err.message);
     }
@@ -68,6 +68,24 @@ const App = () => {
 
   async function editNote(id){
     try{
+
+    }catch(err){
+
+    }
+  }
+
+
+  async function deleteNote(id){
+    try{
+      if(isLoggedIn){
+        console.log("YESSS")
+        await axios.delete(`http://localhost:4000/notes/${id}`, {
+          withCredentials: true
+          })
+          getNotes();
+      }else{
+        setNotes(notes.filter((el) => el.key !== id));
+      }
 
     }catch(err){
 

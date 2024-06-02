@@ -1,6 +1,9 @@
 import 'bulma/css/bulma.css'
 
-function NoteCardView({ data }){
+function NoteCardView({deleteNote, data }){
+    async function onDelete(){
+        await deleteNote(data._id);
+    }
     return (
         <div className="cell">
             <div className="card">
@@ -18,7 +21,7 @@ function NoteCardView({ data }){
                 <footer className="card-footer">
                     <button className="card-footer-item">Save</button>
                     <button className="card-footer-item">Edit</button>
-                    <button className="card-footer-item">Delete</button>
+                    <button onClick={onDelete} className="card-footer-item">Delete</button>
                 </footer>
             </div>
         </div>

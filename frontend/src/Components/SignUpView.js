@@ -19,6 +19,7 @@ function SignUpView({ onSubmit, makeUserLoggedIn}){
             setData({});    
         }catch(err){
             console.log(err.message)
+            setData({email: err.message});
         }
         
 
