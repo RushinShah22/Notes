@@ -1,7 +1,7 @@
 import 'bulma/css/bulma.css'
 import axios from 'axios'
 
-function LogoutView( {makeUserLogout}){
+function LogoutView( {makeUserLogout, userName}){
 
     async function handleClick(){
         try{
@@ -20,7 +20,7 @@ function LogoutView( {makeUserLogout}){
                 <div className="buttons">
                     <div className='button'>
                     <div className='field'>
-                        <label className="label">{`Welcome, ${"shahrushin32@gmail.com"}`}</label>
+                        <label className="label">{`Welcome, ${userName}`}</label>
                     </div>
                     </div>
                     <button onClick={handleClick} className="button is-danger">

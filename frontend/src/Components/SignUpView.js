@@ -14,9 +14,9 @@ function SignUpView({ onSubmit, makeUserLoggedIn}){
                 withCredentials: true
                 })
             console.log(user);
-            setData({});    
             onSubmit();
-            makeUserLoggedIn();
+            makeUserLoggedIn(user.data.userDetails);
+            setData({});    
         }catch(err){
             console.log(err.message)
         }

@@ -6,10 +6,10 @@ import LogInView from './LogInView';
 import { useState } from 'react';
 import LogoutView from './LogoutView';
 
-function NavBarView ( {userLogIn, userLogout, isSignedIn}){
+function NavBarView ( {userLogIn, userLogout, isSignedIn, userName}){
     const [signClicked, setSignClicked] = useState(false);
     const [logClicked, setLogClicked] = useState(false);
-    console.log(isSignedIn);
+
     return (
         <div>
             <nav className="navbar is-success" role="navigation" aria-label="main navigation">
@@ -34,7 +34,7 @@ function NavBarView ( {userLogIn, userLogout, isSignedIn}){
                         </div>
                     </div>
                 </div>}
-                {isSignedIn && <LogoutView makeUserLogout={userLogout}/>}
+                {isSignedIn && <LogoutView makeUserLogout={userLogout} userName={userName}/>}
             </nav>
 
             {signClicked && <SignUpView onSubmit={() => setSignClicked(false)} makeUserLoggedIn={userLogIn}/>}

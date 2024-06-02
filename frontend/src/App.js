@@ -1,24 +1,29 @@
 import 'bulma/css/bulma.css'
 import { useState, useEffect} from 'react';
 import axios from 'axios';
-import NavBarView  from './View/NavBarView'
-import NoteCardView from './View/NoteCardView'
-import NewNoteView from './View/NewNoteView'
-
+import NavBarView  from './Components/NavBarView'
+import NoteCardView from './Components/NoteCardView'
+import NewNoteView from './Components/NewNoteView'
+import { CookiesProvider, useCookies } from 'react-cookie';
 
 
 const App = () => {
   const [notes, setNotes] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userDetails, setUserDetails] = useState({});
+  const [cookies, setCookies] = useCookies(["myCookie"]);
 
 
-  function makeUserLoggedIn(){
-    console.log("YESSSS");
+  function makeUserLoggedIn(data){
     setIsLoggedIn(true);
+    setUserDetails(data);
+    setCookies("firstName", data.firstName);
+    setCookies("lastName", data.lastName);
   }
 
   function makeUserLogout(){
     setIsLoggedIn(false);
+    setUserDetails({})
     setNotes([])
   }
 
@@ -29,7 +34,10 @@ const App = () => {
       });
     
       setNotes(notes.data.notes.map(note => <NoteCardView key={note._id} data={note}/>));
-      if(!isLoggedIn)setIsLoggedIn(true);
+      if(!isLoggedIn){
+        makeUserLoggedIn({firstName: cookies.firstName, lastName: cookies.lastName});
+      }
+
       
     }catch(err){
       console.log(err.message);
@@ -57,6 +65,15 @@ const App = () => {
     
   }
 
+
+  async function editNote(id){
+    try{
+
+    }catch(err){
+
+    }
+  }
+
   useEffect(() => {
     getNotes()
     return () => {}
@@ -64,16 +81,17 @@ const App = () => {
   // getNotes();
 
   return (
+    <CookiesProvider>
     <div>
-       <div><NavBarView userLogIn={makeUserLoggedIn} userLogout={makeUserLogout} isSignedIn={isLoggedIn}/></div>
+       <div><NavBarView userLogIn={makeUserLoggedIn} userLogout={makeUserLogout} isSignedIn={isLoggedIn} userName={`${userDetails.firstName} ${userDetails.lastName}`}/></div>
        <section className='section'><NewNoteView onSubmit={handleNewNote}/></section>
        <section className='section'>
-        <div className='grid is-gap-4.5'>
+        <div className='grid is-gap-4.5 is-col-min-12'>
           {notes}
         </div>
        </section>
     </div>
-
+    </CookiesProvider>
   )
 }
 

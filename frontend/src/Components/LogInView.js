@@ -9,7 +9,7 @@ function LogInView({onSubmit, makeUserLoggedIn}){
     async function  handleSubmit(e){
         e.preventDefault();
         try{
-            await axios.post("http://localhost:4000/signin", {
+            const userDetails = await axios.post("http://localhost:4000/signin", {
                 email,
                 password
                 }, 
@@ -19,10 +19,11 @@ function LogInView({onSubmit, makeUserLoggedIn}){
                     },
                     withCredentials: true
                 }); 
+            makeUserLoggedIn(userDetails.data.userDetails);
             setEmail('');
             setPassword('');
             onSubmit();
-            makeUserLoggedIn();
+            
         }catch(err){
             console.log(err);
         }

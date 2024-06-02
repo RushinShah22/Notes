@@ -12,7 +12,7 @@ function NoteCardView({ data }){
                     {data.note}
                     
                     <br />
-                    <time dateTime={`${new Date(data.createdAt).toLocaleDateString()}`}>{new Date(data.createdAt).toLocaleString()}</time>
+                    <time dateTime={`${new Date(data.createdAt).toLocaleDateString}`}>{new Date(data.createdAt).toLocaleString()}</time>
                     </div>
                 </div>
                 <footer className="card-footer">
