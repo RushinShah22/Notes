@@ -2,12 +2,14 @@ import 'bulma/css/bulma.css'
 import SignUpView from './SignUpView'
 import LogInView from './LogInView';
 
-import { useState } from 'react';
 
-function NavBarView (){
+import { useState } from 'react';
+import LogoutView from './LogoutView';
+
+function NavBarView ( {userLogIn, userLogout, isSignedIn}){
     const [signClicked, setSignClicked] = useState(false);
     const [logClicked, setLogClicked] = useState(false);
-
+    console.log(isSignedIn);
     return (
         <div>
             <nav className="navbar is-success" role="navigation" aria-label="main navigation">
@@ -20,7 +22,7 @@ function NavBarView (){
                 </a>
                 </div>
 
-                <div className="navbar-end">
+                {!isSignedIn && <div className="navbar-end">
                     <div className="navbar-item">
                         <div className="buttons ">
                             <button className="button" onClick={() => setSignClicked(true)} href="/signup" >
@@ -31,11 +33,12 @@ function NavBarView (){
                             </button>
                         </div>
                     </div>
-                </div>
+                </div>}
+                {isSignedIn && <LogoutView makeUserLogout={userLogout}/>}
             </nav>
 
-            {signClicked && <SignUpView onSubmit={() => setSignClicked(false)}/>}
-            {logClicked && <LogInView onSubmit={() => setLogClicked(false)}/>}
+            {signClicked && <SignUpView onSubmit={() => setSignClicked(false)} makeUserLoggedIn={userLogIn}/>}
+            {logClicked && <LogInView onSubmit={() => setLogClicked(false)} makeUserLoggedIn={userLogIn}/>}
 
         </div>
     )

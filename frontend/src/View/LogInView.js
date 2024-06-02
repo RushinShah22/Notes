@@ -2,23 +2,31 @@ import 'bulma/css/bulma.css'
 import { useState } from 'react';
 import axios from 'axios'
 
-function LogInView({onSubmit}){
+function LogInView({onSubmit, makeUserLoggedIn}){
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     async function  handleSubmit(e){
         e.preventDefault();
-        const user = await axios.post("http://localhost:4000/signin", {
-            email,
-            password
-        }, {
-            headers:{
-                'Content-Type': 'application/json',
-            },
-            withCredentials: true
-        });
-        console.log(user);
-        onSubmit();
+        try{
+            await axios.post("http://localhost:4000/signin", {
+                email,
+                password
+                }, 
+                {
+                    headers:{
+                        'Content-Type': 'application/json',
+                    },
+                    withCredentials: true
+                }); 
+            setEmail('');
+            setPassword('');
+            onSubmit();
+            makeUserLoggedIn();
+        }catch(err){
+            console.log(err);
+        }
+        
     }
 
     function handleClick(){

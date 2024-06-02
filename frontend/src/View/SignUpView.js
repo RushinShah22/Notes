@@ -2,18 +2,26 @@ import 'bulma/css/bulma.css'
 import axios from 'axios'
 import { useState } from 'react';
 
-function SignUpView({ onSubmit, clicked}){
+function SignUpView({ onSubmit, makeUserLoggedIn}){
     const [data, setData] = useState({});
     function handleClick(){
         onSubmit();
     }
     async function handleSubmit(){
-        const user = await axios.post("http://localhost:4000/signup", data, { 
-            headers: {'Content-Type' : 'application/json'}, 
-            withCredentials: true
-        })
-        console.log(user);
-        onSubmit(); 
+        try{
+            const user = await axios.post("http://localhost:4000/signup", data, { 
+                headers: {'Content-Type' : 'application/json'}, 
+                withCredentials: true
+                })
+            console.log(user);
+            setData({});    
+            onSubmit();
+            makeUserLoggedIn();
+        }catch(err){
+            console.log(err.message)
+        }
+        
+
     }
     return (
 

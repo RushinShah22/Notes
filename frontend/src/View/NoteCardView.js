@@ -12,13 +12,13 @@ function NoteCardView({ data }){
                     {data.note}
                     
                     <br />
-                    <time dateTime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+                    <time dateTime={`${new Date(data.createdAt).toLocaleDateString()}`}>{new Date(data.createdAt).toLocaleString()}</time>
                     </div>
                 </div>
                 <footer className="card-footer">
-                    <a href={`/notes/${data._id}`} className="card-footer-item">Save</a>
-                    <a href="#" className="card-footer-item">Edit</a>
-                    <a href="#" className="card-footer-item">Delete</a>
+                    <button className="card-footer-item">Save</button>
+                    <button className="card-footer-item">Edit</button>
+                    <button className="card-footer-item">Delete</button>
                 </footer>
             </div>
         </div>

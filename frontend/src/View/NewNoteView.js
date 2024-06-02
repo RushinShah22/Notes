@@ -9,9 +9,10 @@ function NewNoteView( { onSubmit }){
             title,
             note
         }
-        onSubmit(data);
         setTitle('');
         setNote('');
+        onSubmit(data);
+        
     }
    return (
     <div style={{"margin": "2rem"}}>
