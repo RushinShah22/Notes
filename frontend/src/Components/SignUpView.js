@@ -7,15 +7,16 @@ function SignUpView({ onSubmit, makeUserLoggedIn}){
     function handleClick(){
         onSubmit();
     }
-    async function handleSubmit(){
+    async function handleSubmit(e){
+        e.preventDefault();
         try{
             const user = await axios.post("http://localhost:4000/signup", data, { 
                 headers: {'Content-Type' : 'application/json'}, 
                 withCredentials: true
                 })
             console.log(user);
-            onSubmit();
             makeUserLoggedIn(user.data.userDetails);
+            onSubmit();
             setData({});    
         }catch(err){
             console.log(err.message)
