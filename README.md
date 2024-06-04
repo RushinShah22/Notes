@@ -37,7 +37,7 @@ Install the necessary npm modules:
 ```bash
 npm install
 ```
-Create a .env file in the backend directory and set up the required environment variables. An example .env file might look like this:
+Create a config.env file in the backend directory and set up the required environment variables. An example config.env file might look like this:
 
 ```plaintext
 PORT=3000
@@ -64,6 +64,12 @@ cd Notes/frontend
 
 ```bash
 npm install
+```
+Create a .env file in the frontend directory and set up the required environment variables. An example .env file might look like this:
+
+```plaintext
+REACT_APP_PORT=3000
+REACT_APP_BACKEND_URL=http://localhost:4000
 ```
   Start the frontend development server:
 
