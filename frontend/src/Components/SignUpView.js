@@ -11,7 +11,7 @@ function SignUpView(){
     async function handleSubmit(e){
         e.preventDefault();
         try{
-             await axios.post("http://localhost:4000/signup", data, { 
+             await axios.post(`${process.env.REACT_APP_BACKEND_URL}/signup`, data, { 
                 headers: {'Content-Type' : 'application/json'}, 
                 withCredentials: true
                 })

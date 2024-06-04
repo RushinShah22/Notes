@@ -17,7 +17,7 @@ function NewNoteView(){
             try{
               let note = {...data, createdAt: Date.now(), _id: notes.length + 1 + ''};
               if(user.loggedIn){
-                  const newNote = (await axios.post("http://localhost:4000/notes", data, {
+                  const newNote = (await axios.post(`${process.env.REACT_APP_BACKEND_URL}/notes`, data, {
                   headers:{
                     "Content-Type" : "application/json"
                   },

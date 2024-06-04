@@ -15,7 +15,7 @@ function LogInView(){
     async function  handleSubmit(e){
         e.preventDefault();
         try{
-            await axios.post("http://localhost:4000/signin", {
+            await axios.post(`${process.env.REACT_APP_BACKEND_URL}/signin`, {
                 email,
                 password
                 }, 

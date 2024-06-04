@@ -8,7 +8,7 @@ function LogoutView(){
     
     async function handleClick(){
         try{
-            await axios.get("http://localhost:4000/logout", {withCredentials: true});
+            await axios.get(`${process.env.BACKEND_URL}/logout`, {withCredentials: true});
             setUser({});
             window.location.href = '/';
         }catch(err){

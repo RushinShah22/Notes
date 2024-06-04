@@ -18,7 +18,7 @@ function NoteCardView({data}){
             try{
               if(user.loggedIn){
         
-                await axios.delete(`http://localhost:4000/notes/${data._id}`, {
+                await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/notes/${data._id}`, {
                   withCredentials: true
                   })
                   

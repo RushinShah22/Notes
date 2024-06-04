@@ -1,12 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import {createBrowserRouter, Route, RouterProvider} from 'react-router-dom'
+import {createBrowserRouter, RouterProvider} from 'react-router-dom'
+
 import App from './App'
 import LogInView from './Components/LogInView';
 import SignUpView from './Components/SignUpView';
 import EditNoteView from './Components/EditNoteView';
-import { MyNotesProvider, useMyNotesContext } from './NotesContext';
-
+import { MyNotesProvider} from './NotesContext';
 
 
 

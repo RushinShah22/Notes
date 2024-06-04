@@ -31,7 +31,7 @@ function EditNoteView(){
         async function editNote(){
             try{
               if(user.loggedIn){
-                await axios.patch(`http://localhost:4000/notes/${id}`, {title, note}, {
+                await axios.patch(`${process.env.REACT_APP_BACKEND_URL}/notes/${id}`, {title, note}, {
                   withCredentials:true
                 });
               }
