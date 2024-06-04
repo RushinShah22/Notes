@@ -1,7 +1,10 @@
 import 'bulma/css/bulma.css'
 import { useState } from 'react';
+import axios from 'axios'
+import { useMyNotesContext } from '../NotesContext';
 
-function NewNoteView( { onSubmit }){
+function NewNoteView(){
+    const {user, setNotes, notes} = useMyNotesContext();
     const [title, setTitle] = useState('');
     const [note, setNote] = useState('');
     
@@ -10,11 +13,32 @@ function NewNoteView( { onSubmit }){
             title,
             note
         }
+        async function handleNewNote(data){
+            try{
+              let note = {...data, createdAt: Date.now(), _id: notes.length + 1 + ''};
+              if(user.loggedIn){
+                  const newNote = (await axios.post("http://localhost:4000/notes", data, {
+                  headers:{
+                    "Content-Type" : "application/json"
+                  },
+                  withCredentials:true
+                }))
+                note = newNote.data.note
+                
+              }
+              setNotes([note, ...notes]);
+            }catch(err){
+              console.log(err.message);
+            }
+            
+          }
         setTitle('');
         setNote('');
-        onSubmit(data);
+        handleNewNote(data);
         
     }
+
+    
    return (
     <div style={{"margin": "2rem"}}>
         <div className="box title is-4"><strong>WHATS ON YOUR MIND!!!</strong></div>

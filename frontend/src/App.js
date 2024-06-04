@@ -13,33 +13,8 @@ import { useMyNotesContext } from './NotesContext';
 
 const App = () => {
   
-  const {notes, setNotes,user, setUser} = useMyNotesContext();
- 
-  
-   
-  async function handleNewNote(data){
-    try{
-      let note = {...data, createdAt: Date.now(), _id: notes.length + 1 + ''};
-      if(user.loggedIn){
-          const newNote = (await axios.post("http://localhost:4000/notes", data, {
-          headers:{
-            "Content-Type" : "application/json"
-          },
-          withCredentials:true
-        }))
-        note = newNote.data.note
-        
-      }
-      setNotes([note, ...notes]);
-    }catch(err){
-      console.log(err.message);
-    }
-    
-  }
+  const {setNotes,user, setUser} = useMyNotesContext();
 
-
-
-  
 
   const getNotes = async () => {
     
@@ -85,7 +60,7 @@ const App = () => {
 
   return (
 
-    <HomePage handleNewNote={handleNewNote}/>
+    <HomePage/>
    
   )
 }
