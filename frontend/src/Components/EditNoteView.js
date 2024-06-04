@@ -34,13 +34,12 @@ function EditNoteView(){
                 await axios.patch(`http://localhost:4000/notes/${id}`, {title, note}, {
                   withCredentials:true
                 });
-              }else{
-                setNotes(notes.map(n => {
-                  if(n._id === id) return {_id: id, title, note, createdAt: new Date()};
-                  else return n;
-                }))
               }
-
+            setNotes(notes.map(n => {
+                if(n._id === id) return {_id: id, title, note, createdAt: new Date()};
+                else return n;
+            }))
+            
               
           }catch(err){
               console.log(err);

@@ -45,12 +45,12 @@ function NoteCardView({data}){
                     <p className="card-header-title">{data.title}</p>
                 </header>
                 <div className="card-content">
-                    <div className="content">
+                    <div className="content" style={{"wordWrap": "break-word", "whiteSpace" : "pre-wrap"}}>
                     {data.note}
-                    
+                    </div>
                     <br />
                     <time dateTime={`${new Date(data.createdAt).toLocaleDateString}`}>{new Date(data.createdAt).toLocaleString()}</time>
-                    </div>
+                    
                 </div>
                 <footer className="card-footer">
                     <button onClick={handleEditBtn} className="card-footer-item">Edit</button>

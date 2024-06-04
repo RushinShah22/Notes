@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.route("/").get(AuthController.checkAuth,NotesController.getAllNotes).post(AuthController.checkAuth,NotesController.addANote);
 
-router.route("/:id").get(AuthController.checkAuth,NotesController.getANote).delete(AuthController.checkAuth, NotesController.deleteANote);
+router.route("/:id").get(AuthController.checkAuth,NotesController.getANote).patch(AuthController.checkAuth, NotesController.editANote).delete(AuthController.checkAuth, NotesController.deleteANote);
 
 
 

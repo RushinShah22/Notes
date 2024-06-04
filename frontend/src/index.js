@@ -12,10 +12,6 @@ import { MyNotesProvider, useMyNotesContext } from './NotesContext';
 
 const el = document.getElementById("root");
 
-function Trial(){
-    console.log(useMyNotesContext());
-    return <div></div>
-}
 
 const root = ReactDOM.createRoot(el);
 

@@ -70,3 +70,18 @@ module.exports.deleteANote = async (req, res) => {
     }
 }
 
+
+module.exports.editANote  = async (req, res) => {
+    try{
+        const note = await NoteModel.findByIdAndUpdate(req.params.id, req.body, {new: true, runValidators: true});
+        res.status(201).json({
+            status: "success",
+            note
+        })
+    }catch(err){
+        res.status(500).json({
+            status: "fail",
+            message: err.message
+        })
+    }
+}

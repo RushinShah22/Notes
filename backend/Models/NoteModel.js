@@ -27,6 +27,10 @@ NoteSchema.pre('save', function(next){
     this.createdAt = new Date();
     next();
 })
+NoteSchema.pre('findOneAndUpdate', function(next){
+    this.createdAt = new Date();
+    next();
+})
 
 const NoteModel = mongoose.model('note', NoteSchema);
 
