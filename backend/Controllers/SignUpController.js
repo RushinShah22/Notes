@@ -5,19 +5,15 @@ const UserModel = require("./../Models/UserModel");
 module.exports.SignUpUser = async (req, res) => {
     try{
         console.log(req.body);
-        let user = await UserModel.create(req.body);
+        const user = (await UserModel.create(req.body));
         console.log(user);
-        const token = AuthController.createJwt(user._id );
-        console.log(token);
+        const token = AuthController.createJwt(user._id);
         res.cookie("jwt", token,  {
             httpOnly: true,
             maxAge: 3 * 60 * 60 * 24 * 1000
         })
-        console.log(req.body);
-       
 
-        res.cookie("firstName", user.firstName)
-        res.cookie("lastName", user.lastName);
+       
         res.status(201).json({
             status: "Success",
             userDetails: {

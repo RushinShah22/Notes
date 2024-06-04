@@ -1,15 +1,21 @@
 import 'bulma/css/bulma.css'
 import { useState } from 'react';
 import axios from 'axios'
+import { Link} from 'react-router-dom';
 
-function LogInView({onSubmit, makeUserLoggedIn}){
 
+
+function LogInView(){
+   
+    
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    
+    
     async function  handleSubmit(e){
         e.preventDefault();
         try{
-            const userDetails = await axios.post("http://localhost:4000/signin", {
+            await axios.post("http://localhost:4000/signin", {
                 email,
                 password
                 }, 
@@ -19,22 +25,19 @@ function LogInView({onSubmit, makeUserLoggedIn}){
                     },
                     withCredentials: true
                 }); 
-            makeUserLoggedIn(userDetails.data.userDetails);
             setEmail('');
             setPassword('');
-            onSubmit();
+            window.location.href =  "/";
             
         }catch(err){
-            console.log(err);
+            
             setEmail(err.message);
             setPassword(err.message);
         }
         
     }
 
-    function handleClick(){
-        onSubmit();
-    }
+    
     return (
 
         <div className={`modal is-active`}>
@@ -42,7 +45,7 @@ function LogInView({onSubmit, makeUserLoggedIn}){
         <div className="modal-card">
             <header className="modal-card-head">
                 <p className="modal-card-title">Log In</p>
-                <button className="delete" aria-label="close" onClick={handleClick}></button>
+                <Link to="/"><button className="delete" aria-label="close"></button></Link>
             </header>
             <section className="modal-card-body">
                 <div>

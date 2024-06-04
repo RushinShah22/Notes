@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const UserModel = require("./../Models/UserModel")
 
-
+// checking if user is valid
 module.exports.checkAuth = (req, res, next) => {
     if(!req.cookies.jwt){
         res.status(401).json({
@@ -11,7 +11,7 @@ module.exports.checkAuth = (req, res, next) => {
         return;
     }
     const auth = jwt.verify(req.cookies.jwt, process.env.JWT_KEY);
-    // console.log(auth);
+    
 
     if(!auth){
         res.status(401).json({

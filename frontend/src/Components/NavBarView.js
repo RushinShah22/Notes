@@ -1,42 +1,37 @@
 import 'bulma/css/bulma.css'
-import SignUpView from './SignUpView'
-import LogInView from './LogInView';
-
-
-import { useState } from 'react';
 import LogoutView from './LogoutView';
+import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import UserContext from '../userContext';
 
-function NavBarView ( {userLogIn, userLogout, isSignedIn, userName}){
-    const [signClicked, setSignClicked] = useState(false);
-    const [logClicked, setLogClicked] = useState(false);
+function NavBarView (){
 
+    const userDetails = useContext(UserContext);
+    // console.log(userDetails);
     return (
         <div>
             <nav className="navbar is-success" role="navigation" aria-label="main navigation">
                 <div className="navbar-brand">
                 <a className="navbar-item" href="/">
-                <div className="box block"><h4 class="title is-4">NOTES</h4></div>
+                <div className="box block"><h4 className="title is-4">NOTES</h4></div>
                 
                 </a>
                 </div>
 
-                {!isSignedIn && <div className="navbar-end">
+                {!userDetails.userDetails.loggedIn && <div className="navbar-end">
                     <div className="navbar-item">
                         <div className="buttons ">
-                            <button className="button" onClick={() => setSignClicked(true)} href="/signup" >
+                            <Link to="signup"><button className="button">
                                 <strong>Sign up</strong>
-                            </button>
-                            <button className="button" onClick={() => setLogClicked(true)} href="/login">
+                            </button> </Link>
+                            <Link to="login"><button className="button">
                                 Log in
-                            </button>
+                            </button> </ Link >
                         </div>
                     </div>
                 </div>}
-                {isSignedIn && <LogoutView makeUserLogout={userLogout} userName={userName}/>}
+                {userDetails.userDetails.loggedIn && <UserContext.Provider value={userDetails}> <LogoutView /> </UserContext.Provider> }
             </nav>
-
-            {signClicked && <SignUpView onSubmit={() => setSignClicked(false)} makeUserLoggedIn={userLogIn}/>}
-            {logClicked && <LogInView onSubmit={() => setLogClicked(false)} makeUserLoggedIn={userLogIn}/>}
 
         </div>
     )

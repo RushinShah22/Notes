@@ -35,12 +35,12 @@ const UserSchema = new mongoose.Schema({
 
 // hashing users password
 
-UserSchema.pre('save', async function(next){
+UserSchema.pre('save', async function(){
 
     const salt = await bcrypt.genSalt();
     this.password = await bcrypt.hash(this.password, salt);
-
-    next();
+    // console.log(this);
+    
 });
 
 // function to validate login for a user

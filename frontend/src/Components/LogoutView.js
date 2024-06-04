@@ -1,13 +1,17 @@
 import 'bulma/css/bulma.css'
 import axios from 'axios'
+import { useContext } from 'react';
+import UserContext from '../userContext';
 
-function LogoutView( {makeUserLogout, userName}){
+function LogoutView(){
 
+    const userDetails = useContext(UserContext);
+    
     async function handleClick(){
         try{
             await axios.get("http://localhost:4000/logout", {withCredentials: true});
-            console.log(makeUserLogout)
-            makeUserLogout();
+            userDetails.setUserDetails({});
+            window.location.href = '/';
         }catch(err){
             console.log(err.message);
         }
@@ -20,7 +24,7 @@ function LogoutView( {makeUserLogout, userName}){
                 <div className="buttons">
                     <div className='button'>
                     <div className='field'>
-                        <label className="label">{`Welcome, ${userName}`}</label>
+                        <label className="label">{`Welcome, ${userDetails.userDetails.firstName} ${userDetails.userDetails.lastName}`}</label>
                     </div>
                     </div>
                     <button onClick={handleClick} className="button is-danger">

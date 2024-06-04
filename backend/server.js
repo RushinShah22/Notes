@@ -3,7 +3,7 @@ const app = require("./app.js");
 
 
 // connecting to mongoDB
-const mongoURI = process.env.MONGO_URL;
+const mongoURI = process.env.MONGO_URI;
 
 (async () => {
     try {

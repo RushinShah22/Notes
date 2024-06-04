@@ -39,9 +39,9 @@ module.exports.getANote = async (req, res) => {
 
 module.exports.addANote = async (req, res) => {
     try{
-        console.log(req.body);  
+        
         const note = await NoteModel.create(req.body);
-        console.log(note);
+        
         res.status(201).json({
             status: "success",
             note

@@ -1,4 +1,5 @@
 import 'bulma/css/bulma.css'
+import { Link } from 'react-router-dom';
 
 function NoteCardView({deleteNote, data }){
     async function onDelete(){
@@ -19,8 +20,7 @@ function NoteCardView({deleteNote, data }){
                     </div>
                 </div>
                 <footer className="card-footer">
-                    <button className="card-footer-item">Save</button>
-                    <button className="card-footer-item">Edit</button>
+                    <Link to={`notes/${data._id}`}><button className="card-footer-item">Edit</button></Link>
                     <button onClick={onDelete} className="card-footer-item">Delete</button>
                 </footer>
             </div>
