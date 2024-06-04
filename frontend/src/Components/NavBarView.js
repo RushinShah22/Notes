@@ -1,13 +1,24 @@
 import 'bulma/css/bulma.css'
 import LogoutView from './LogoutView';
-import { Link } from 'react-router-dom';
-import { useContext } from 'react';
-import UserContext from '../userContext';
+
+
+import { useNavigate } from 'react-router-dom';
+import { useMyNotesContext } from '../NotesContext';
+
 
 function NavBarView (){
 
-    const userDetails = useContext(UserContext);
-    // console.log(userDetails);
+    const {user}= useMyNotesContext();
+    const navigate = useNavigate();
+
+    function handleSignup(){
+        navigate("/signup");
+    }
+
+    function handleLogin(){
+        navigate("/login")
+    }
+
     return (
         <div>
             <nav className="navbar is-success" role="navigation" aria-label="main navigation">
@@ -18,19 +29,19 @@ function NavBarView (){
                 </a>
                 </div>
 
-                {!userDetails.userDetails.loggedIn && <div className="navbar-end">
+                {!user.loggedIn && <div className="navbar-end">
                     <div className="navbar-item">
                         <div className="buttons ">
-                            <Link to="signup"><button className="button">
+                            <button onClick={handleSignup} className="button">
                                 <strong>Sign up</strong>
-                            </button> </Link>
-                            <Link to="login"><button className="button">
+                            </button> 
+                            <button onClick={handleLogin} className="button">
                                 Log in
-                            </button> </ Link >
+                            </button> 
                         </div>
                     </div>
                 </div>}
-                {userDetails.userDetails.loggedIn && <UserContext.Provider value={userDetails}> <LogoutView /> </UserContext.Provider> }
+                {user.loggedIn && <LogoutView /> }
             </nav>
 
         </div>

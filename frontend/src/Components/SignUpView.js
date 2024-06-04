@@ -1,23 +1,23 @@
 import 'bulma/css/bulma.css'
 import axios from 'axios'
 import {  useState } from 'react';
-import { Link} from 'react-router-dom';
+import { Link, useNavigate} from 'react-router-dom';
 
 
 function SignUpView(){
     const [data, setData] = useState({});
     
-    
+    const navigate = useNavigate();
     async function handleSubmit(e){
         e.preventDefault();
         try{
-            const user = await axios.post("http://localhost:4000/signup", data, { 
+             await axios.post("http://localhost:4000/signup", data, { 
                 headers: {'Content-Type' : 'application/json'}, 
                 withCredentials: true
                 })
             setData({});
-            window.location.href =  "/";
-            // userDetails.setUserDetails({loggedIn: true, ...user.data.user});
+            navigate("/");
+            
         }catch(err){
             console.log(err.message)
             setData({email: err.message});

@@ -4,6 +4,7 @@ import { useState } from 'react';
 function NewNoteView( { onSubmit }){
     const [title, setTitle] = useState('');
     const [note, setNote] = useState('');
+    
     function handleCreateClick(e){
         const data = {
             title,

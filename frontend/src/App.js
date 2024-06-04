@@ -1,23 +1,26 @@
 import 'bulma/css/bulma.css'
-import { useState, useEffect} from 'react';
+import { useEffect} from 'react';
 
 import axios from 'axios';
-import NoteCardView from './Components/NoteCardView'
-import UserContext from './userContext';
-import NotesContext from './NotesContext';
+
+
+
 import HomePage from './Components/HomePage';
+import { useMyNotesContext } from './NotesContext';
 
 
 
 
 const App = () => {
-  const [notes, setNotes] = useState([]);
-  const [userDetails, setUserDetails] = useState({});
-    
+  
+  const {notes, setNotes,user, setUser} = useMyNotesContext();
+ 
+  
+   
   async function handleNewNote(data){
     try{
-      let note = {...data, createdAt: Date.now(), _id: notes.length + 1};
-      if(userDetails.loggedIn){
+      let note = {...data, createdAt: Date.now(), _id: notes.length + 1 + ''};
+      if(user.loggedIn){
           const newNote = (await axios.post("http://localhost:4000/notes", data, {
           headers:{
             "Content-Type" : "application/json"
@@ -27,7 +30,7 @@ const App = () => {
         note = newNote.data.note
         
       }
-      setNotes([<NoteCardView deleteNote={deleteNote} key={note._id} data={note}/>, ...notes]);
+      setNotes([note, ...notes]);
     }catch(err){
       console.log(err.message);
     }
@@ -35,30 +38,8 @@ const App = () => {
   }
 
 
-  async function editNote(id){
-    try{
 
-    }catch(err){
-
-    }
-  }
-
-
-  async function deleteNote(id){
-    try{
-      if(userDetails.loggedIn){
-
-        await axios.delete(`http://localhost:4000/notes/${id}`, {
-          withCredentials: true
-          })
-          
-      }
-      setNotes(notes.filter((el) => el.key !== id));      
-
-    }catch(err){
-      console.log(err);
-    }
-  }
+  
 
   const getNotes = async () => {
     
@@ -69,7 +50,9 @@ const App = () => {
       });
       
 
-      setNotes(notes.data.notes.map(note => <NoteCardView deleteNote={deleteNote} key={note._id} data={note}/>));
+      setNotes(notes.data.notes.map(note => {
+        return {...note, loggedIn: user.loggedIn}
+      }));
       
     }catch(err){
       console.log(err.message);
@@ -84,8 +67,7 @@ const App = () => {
       const user = await axios.get("http://localhost:4000/user", {withCredentials: true});
 
       if(user){
-        
-        setUserDetails({loggedIn: true, ...user.data.user});
+        setUser({loggedIn: true, ...user.data.user});
         getNotes();
         
       }
@@ -95,21 +77,16 @@ const App = () => {
   }
 
   useEffect(() => {
-    
-    
     initUserLogin();
-
   }, [])
 
 
   
 
   return (
-    <UserContext.Provider value={{userDetails, setUserDetails}}>
-        <NotesContext.Provider value={notes}>
-          <HomePage handleNewNote={handleNewNote}/>
-        </NotesContext.Provider>
-    </UserContext.Provider>
+
+    <HomePage handleNewNote={handleNewNote}/>
+   
   )
 }
 

@@ -1,9 +1,42 @@
 import 'bulma/css/bulma.css'
-import { Link } from 'react-router-dom';
+import axios from 'axios'
 
-function NoteCardView({deleteNote, data }){
+import { useNavigate } from 'react-router-dom';
+import { useMyNotesContext } from '../NotesContext';
+
+
+function NoteCardView({data}){
+    const navigate = useNavigate();
+
+    const {notes, user, setNotes} = useMyNotesContext();
+    
+
+    
     async function onDelete(){
-        await deleteNote(data._id);
+        
+        async function deleteNote(){
+            try{
+              if(user.loggedIn){
+        
+                await axios.delete(`http://localhost:4000/notes/${data._id}`, {
+                  withCredentials: true
+                  })
+                  
+              }
+              
+              setNotes(notes.filter((el) => el._id !== data._id));      
+        
+            }catch(err){
+              console.log(err);
+            }
+          }
+          await deleteNote();
+
+    }
+
+    function handleEditBtn(){
+        
+        navigate(`/notes/${data._id}`);
     }
     return (
         <div className="cell">
@@ -20,7 +53,7 @@ function NoteCardView({deleteNote, data }){
                     </div>
                 </div>
                 <footer className="card-footer">
-                    <Link to={`notes/${data._id}`}><button className="card-footer-item">Edit</button></Link>
+                    <button onClick={handleEditBtn} className="card-footer-item">Edit</button>
                     <button onClick={onDelete} className="card-footer-item">Delete</button>
                 </footer>
             </div>
