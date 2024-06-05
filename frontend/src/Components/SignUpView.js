@@ -13,7 +13,8 @@ function SignUpView(){
         try{
              await axios.post(`${process.env.REACT_APP_BACKEND_URL}/signup`, data, { 
                 headers: {'Content-Type' : 'application/json'}, 
-                withCredentials: true
+                withCredentials: true,
+                credentials: 'include'
                 })
             setData({});
             navigate("/");

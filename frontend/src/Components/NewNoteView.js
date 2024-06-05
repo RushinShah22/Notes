@@ -21,7 +21,8 @@ function NewNoteView(){
                   headers:{
                     "Content-Type" : "application/json"
                   },
-                  withCredentials:true
+                  withCredentials:true,
+                  credentials: 'include'
                 }))
                 note = newNote.data.note
                 

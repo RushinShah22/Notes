@@ -20,7 +20,8 @@ const App = () => {
       try{
     
         const notes = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/notes`,{
-          withCredentials: true
+          withCredentials: true,
+          credentials: 'include'
         });
         
   
@@ -39,7 +40,7 @@ const App = () => {
     async function initUserLogin(){
       try{
         
-        const user = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/user`, {withCredentials: true});
+        const user = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/user`, {withCredentials: true, credentials: 'include'});
   
         if(user){
           setUser({loggedIn: true, ...user.data.user});

@@ -23,7 +23,8 @@ function LogInView(){
                     headers:{
                         'Content-Type': 'application/json',
                     },
-                    withCredentials: true
+                    withCredentials: true,
+                    credentials: 'include'
                 });
             console.log(user);
             setEmail('');

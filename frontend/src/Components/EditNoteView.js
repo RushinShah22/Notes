@@ -32,7 +32,8 @@ function EditNoteView(){
             try{
               if(user.loggedIn){
                 await axios.patch(`${process.env.REACT_APP_BACKEND_URL}/notes/${id}`, {title, note}, {
-                  withCredentials:true
+                  withCredentials:true,
+                  credentials: 'include'
                 });
               }
             setNotes(notes.map(n => {
