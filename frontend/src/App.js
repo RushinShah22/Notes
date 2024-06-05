@@ -40,7 +40,7 @@ const App = () => {
     
     async function initUserLogin(){
       try{
-        
+        navigate("/loader");
         const user = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/user`, {withCredentials: true, credentials: 'include'});
   
         if(user){
@@ -48,13 +48,15 @@ const App = () => {
           getNotes();
           
         }
+        navigate("/");
       }catch(err){
+        navigate("/");
         console.log(err);
       }
     }
-    navigate("/loader");
+    
     initUserLogin();
-    navigate("/");
+    
   }, [user.loggedIn])
 
 
