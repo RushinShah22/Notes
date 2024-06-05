@@ -57,7 +57,7 @@ const App = () => {
     
     initUserLogin();
     
-  }, [user.loggedIn])
+  }, [user])
 
 
   
