@@ -4,7 +4,7 @@ const NoteModel = require("./../Models/NoteModel");
 
 module.exports.getAllNotes = async (req, res) => {
     try{
-        const notes = await NoteModel.find({userID: req.body.userID});
+        const notes = await NoteModel.find({userID: req.body.userID}).sort({createdAt: -1});
     
         res.status(200).json({
             status: "success",
