@@ -14,7 +14,11 @@ dotenv.config({
 });
 const app = express();
 
-app.use(cors());
+app.use(cors({
+    origin: "https://notes-eight-woad.vercel.app",
+    methods: ["GET", "POST", "DELETE", "PATCH"],
+    credentials: true
+}));
 app.use(express.json());
 app.use(cookieParser());
 
