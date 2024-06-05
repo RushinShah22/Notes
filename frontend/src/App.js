@@ -39,7 +39,7 @@ const App = () => {
     
     async function initUserLogin(){
       try{
-        navigate("/loader");
+       
         const user = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/user`, {withCredentials: true});
   
         if(user){
