@@ -28,7 +28,7 @@ function LogInView(){
             console.log(user);
             setEmail('');
             setPassword('');
-            navigate("/");
+            // navigate("/");
             
         }catch(err){
             
