@@ -3,6 +3,7 @@ import { useEffect} from 'react';
 import axios from 'axios';
 import HomePage from './Components/HomePage';
 import { useMyNotesContext } from './NotesContext';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -10,7 +11,7 @@ import { useMyNotesContext } from './NotesContext';
 const App = () => {
   
   const {setNotes,user, setUser} = useMyNotesContext();
-
+  const navigate = useNavigate();
 
   
 
@@ -51,8 +52,10 @@ const App = () => {
         console.log(err);
       }
     }
+    navigate("/loader");
     initUserLogin();
-  }, [])
+    navigate("/");
+  }, [user.loggedIn])
 
 
   
