@@ -44,7 +44,7 @@ const App = () => {
   
         if(user){
           setUser({loggedIn: true, ...user.data.user});
-          getNotes();
+          await getNotes();
           
         }
         
@@ -54,7 +54,7 @@ const App = () => {
       }
     }
     initUserLogin();
-    navigate("/")
+   
   }, [user.loggedIn])
 
 
