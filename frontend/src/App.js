@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 const App = () => {
   
   const {setNotes,user, setUser} = useMyNotesContext();
-  
+  const navigate = useNavigate();
   
 
   useEffect(() => {
@@ -39,7 +39,7 @@ const App = () => {
     
     async function initUserLogin(){
       try{
-        
+        navigate("/loader");
         const user = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/user`, {withCredentials: true});
   
         if(user){
@@ -54,7 +54,8 @@ const App = () => {
       }
     }
     initUserLogin();
-  }, [])
+    navigate("/")
+  }, [user.loggedIn])
 
 
   
