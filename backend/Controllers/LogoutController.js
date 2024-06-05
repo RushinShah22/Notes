@@ -2,7 +2,10 @@
 module.exports.logoutUser = (req, res) => {
     try{
         res.cookie('jwt', '', {
-            maxAge: 1
+            maxAge: 1,
+            sameSite: 'None',
+            secure: true,
+
         });
         res.status(200).json({
             status: "success",

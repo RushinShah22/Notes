@@ -7,6 +7,7 @@ module.exports.SignInUser = async (req, res) => {
     res.cookie("jwt", token,  {
         httpOnly: true,
         secure: true,
+        sameSite: 'None',
         maxAge: 3 * 60 * 60 * 24 * 1000
     })
     

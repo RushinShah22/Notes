@@ -10,6 +10,8 @@ module.exports.SignUpUser = async (req, res) => {
         const token = AuthController.createJwt(user._id);
         res.cookie("jwt", token,  {
             httpOnly: true,
+            sameSite: 'None',
+            secure: true,
             maxAge: 3 * 60 * 60 * 24 * 1000
         })
 
