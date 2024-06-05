@@ -3,6 +3,7 @@ const UserModel = require("./../Models/UserModel")
 
 // checking if user is valid
 module.exports.checkAuth = (req, res, next) => {
+    console.log(req);
     if(!req.cookies.jwt){
         res.status(401).json({
             status: "fail",
