@@ -15,7 +15,7 @@ function LogInView(){
     async function  handleSubmit(e){
         e.preventDefault();
         try{
-            await axios.post(`${process.env.REACT_APP_BACKEND_URL}/signin`, {
+            const user = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/signin`, {
                 email,
                 password
                 }, 
@@ -24,7 +24,8 @@ function LogInView(){
                         'Content-Type': 'application/json',
                     },
                     withCredentials: true
-                }); 
+                });
+            console.log(user);
             setEmail('');
             setPassword('');
             navigate("/");
