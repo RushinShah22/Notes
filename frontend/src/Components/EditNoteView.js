@@ -30,6 +30,7 @@ function EditNoteView(){
        
         async function editNote(){
             try{
+                navigate("/loader")
               if(user.loggedIn){
                 await axios.patch(`${process.env.REACT_APP_BACKEND_URL}/notes/${id}`, {title, note}, {
                   withCredentials:true
@@ -40,7 +41,6 @@ function EditNoteView(){
                 else return n;
             }))
             
-              
           }catch(err){
               console.log(err);
           }

@@ -17,7 +17,7 @@ function NoteCardView({data}){
         async function deleteNote(){
             try{
               if(user.loggedIn){
-        
+                
                 await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/notes/${data._id}`, {
                   withCredentials: true
                   })
@@ -25,11 +25,13 @@ function NoteCardView({data}){
               }
               
               setNotes(notes.filter((el) => el._id !== data._id));      
-        
+              navigate("/");
             }catch(err){
+                navigate("/")
               console.log(err);
             }
           }
+          navigate("/loader");
           await deleteNote();
 
     }

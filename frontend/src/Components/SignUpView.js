@@ -11,6 +11,7 @@ function SignUpView(){
     async function handleSubmit(e){
         e.preventDefault();
         try{
+            navigate("/loader");
              await axios.post(`${process.env.REACT_APP_BACKEND_URL}/signup`, data, { 
                 headers: {'Content-Type' : 'application/json'}, 
                 withCredentials: true
@@ -19,6 +20,7 @@ function SignUpView(){
             navigate("/");
             
         }catch(err){
+            navigate("/signup")
             console.log(err.message)
             setData({email: err.message});
         }

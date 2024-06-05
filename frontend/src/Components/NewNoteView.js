@@ -2,11 +2,14 @@ import 'bulma/css/bulma.css'
 import { useState } from 'react';
 import axios from 'axios'
 import { useMyNotesContext } from '../NotesContext';
+import { useNavigate } from 'react-router-dom';
 
 function NewNoteView(){
     const {user, setNotes, notes} = useMyNotesContext();
     const [title, setTitle] = useState('');
     const [note, setNote] = useState('');
+    const navigate = useNavigate();
+
     
     function handleCreateClick(e){
         const data = {
@@ -15,6 +18,7 @@ function NewNoteView(){
         }
         async function handleNewNote(data){
             try{
+                navigate("/loader");
               let note = {...data, createdAt: Date.now(), _id: notes.length + 1 + ''};
               if(user.loggedIn){
                   const newNote = (await axios.post(`${process.env.REACT_APP_BACKEND_URL}/notes`, data, {
@@ -27,7 +31,9 @@ function NewNoteView(){
                 
               }
               setNotes([note, ...notes]);
+              navigate("/")
             }catch(err){
+                navigate("/")
               console.log(err.message);
             }
             

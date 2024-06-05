@@ -7,6 +7,7 @@ import LogInView from './Components/LogInView';
 import SignUpView from './Components/SignUpView';
 import EditNoteView from './Components/EditNoteView';
 import { MyNotesProvider} from './NotesContext';
+import Loader from './Components/Loader';
 
 
 
@@ -31,6 +32,9 @@ const router = createBrowserRouter([{
 }, {
     path: "/notes/:id",
     element: <MyNotesProvider children={<EditNoteView />} />,
+},{
+    path: "/loader",
+    element: <Loader />
 }])
 
 

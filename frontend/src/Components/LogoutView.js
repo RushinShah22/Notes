@@ -1,13 +1,16 @@
 import 'bulma/css/bulma.css'
 import axios from 'axios'
 import { useMyNotesContext } from '../NotesContext';
+import { useNavigate } from 'react-router-dom';
 
 function LogoutView(){
 
     const {user, setUser} = useMyNotesContext();
+    const navigate = useNavigate();
     
     async function handleClick(){
         try{
+            navigate("/loader")
             await axios.get(`${process.env.REACT_APP_BACKEND_URL}/logout`, {withCredentials: true});
             setUser({});
             window.location.href = '/';

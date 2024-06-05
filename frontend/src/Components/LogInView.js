@@ -5,6 +5,8 @@ import { Link, useNavigate} from 'react-router-dom';
 
 
 
+
+
 function LogInView(){
    
     
@@ -14,7 +16,9 @@ function LogInView(){
     
     async function  handleSubmit(e){
         e.preventDefault();
+
         try{
+            navigate("/loader") 
             await axios.post(`${process.env.REACT_APP_BACKEND_URL}/signin`, {
                 email,
                 password
@@ -29,8 +33,9 @@ function LogInView(){
             setPassword('');
             navigate("/");
             
-        }catch(err){
             
+        }catch(err){
+            navigate("/login")
             setEmail(err.message);
             setPassword(err.message);
         }
@@ -50,6 +55,7 @@ function LogInView(){
             <section className="modal-card-body">
                 <div>
                 <form className="box" onSubmit={handleSubmit}>
+                
                     <div className="field">
                         <label className="label">Email</label>
                         <div className="control">
