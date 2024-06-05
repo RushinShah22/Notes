@@ -2,11 +2,14 @@ import 'bulma/css/bulma.css'
 import { useState } from 'react';
 import axios from 'axios'
 import { useMyNotesContext } from '../NotesContext';
+import { useNavigate } from 'react-router-dom';
 
 function NewNoteView(){
     const {user, setNotes, notes} = useMyNotesContext();
     const [title, setTitle] = useState('');
     const [note, setNote] = useState('');
+    const navigate = useNavigate();
+
     
     function handleCreateClick(e){
         const data = {
@@ -35,7 +38,9 @@ function NewNoteView(){
           }
         setTitle('');
         setNote('');
+        navigate("/loader")
         handleNewNote(data);
+        navigate("/")
         
     }
 

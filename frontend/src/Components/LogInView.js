@@ -15,6 +15,7 @@ function LogInView(){
     async function  handleSubmit(e){
         e.preventDefault();
         try{
+            navigate("/loader");
             const user = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/signin`, {
                 email,
                 password
@@ -26,13 +27,13 @@ function LogInView(){
                     withCredentials: true,
                     credentials: 'include'
                 });
-            console.log(user);
+            
             setEmail('');
             setPassword('');
-            // navigate("/");
+            navigate("/");
             
         }catch(err){
-            
+            navigate("/login")
             setEmail(err.message);
             setPassword(err.message);
         }
